@@ -1,0 +1,11 @@
+{:deps {org.clojure/clojurescript {:mvn/version "1.10.597"}
+        esprit {:local/root "/home/kiran/src/esprit"}}
+ :paths ["src" "resources"]
+ :aliases {:build {:main-opts ["-m" "cljs.main"
+                               "-co" "@build-opts.edn"
+                               "-c" "hackerhud.core"]}
+           :rom {:main-opts ["-m" "esprit.make-rom"]}
+           :repl {:main-opts ["-m" "cljs.main"
+                              "-re" "esprit"
+                              "-ro" "@repl-opts.edn"
+                              "-r"]}}}
