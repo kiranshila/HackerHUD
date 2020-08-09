@@ -2,7 +2,7 @@
         esprit {:local/root "/home/kiran/src/esprit"}}
  :paths ["src" "resources"]
  :aliases {:build {:main-opts ["-m" "cljs.main"
-                               "-co" "@build-opts.edn"
+                               "-co" "@build-opts.edn:@secrets.edn"
                                "-c" "hackerhud.core"]}
            :rom {:main-opts ["-m" "esprit.make-rom"]}
            :repl {:main-opts ["-m" "cljs.main"

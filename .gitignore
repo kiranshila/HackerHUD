@@ -7,3 +7,4 @@ tmp/
 .nrepl-port
 out/
 node_modules/
+resources/secrets.edn

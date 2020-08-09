@@ -7,6 +7,10 @@
 (def ntp-server "us.pool.ntp.org")
 (def tz-offset (str -5))
 
+;; These get set by secrets.edn
+(goog-define pass "")
+(goog-define ssid "")
+
 (.connect wifi ssid #js{:password pass})
 (.setSNTP wifi ntp-server tz-offset)
 
