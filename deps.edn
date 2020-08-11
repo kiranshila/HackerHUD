@@ -1,4 +1,5 @@
 {:deps {org.clojure/clojurescript {:mvn/version "1.10.597"}
+        org.clojure/core.async {:mvn/version "1.3.610"}
         esprit {:local/root "/home/kiran/src/esprit"}}
  :paths ["src" "resources"]
  :aliases {:build {:main-opts ["-m" "cljs.main"

@@ -21,7 +21,7 @@ out/main.bin: out/main.js
 	$(CLOJURE) -A:rom
 
 flash: out/main.bin
-	$(ESP) $(ESPFLAGS) write_flash 0x2C0000 $(OUT)
+	$(ESP) $(ESPFLAGS) write_flash 0x320000 $(OUT)
 
 clean:
 	-rm -r .cpcache/
