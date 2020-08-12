@@ -27,7 +27,8 @@
 (set-interval update-brightness 1000)
 
 ; When wifi connects, update system time
-(.on wifi "connected" utils/set-new-time)
+(.on wifi "connected" (do (utils/set-new-time)
+                          (utils/set-new-weather)))
 
 ; Pages
 
