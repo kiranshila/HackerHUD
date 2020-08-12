@@ -123,7 +123,7 @@
 ;; Weather
 
 (def city "Tampa")
-(def weather-api-key "1837f694725e881ebe09ab2a50f0f509")
+(goog-define weather-api-key "")
 (def current-weather (atom nil))
 
 (defn weather-api [query api-key]
