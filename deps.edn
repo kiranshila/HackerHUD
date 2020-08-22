@@ -1,12 +1,16 @@
 {:deps {org.clojure/clojurescript {:mvn/version "1.10.764"}
-        org.clojure/core.async {:mvn/version "1.3.610"}
         esprit {:local/root "/home/kiran/src/esprit"}}
  :paths ["src" "resources"]
  :aliases {:build {:main-opts ["-m" "cljs.main"
                                "-co" "@build-opts.edn:@secrets.edn"
                                "-c" "hackerhud.core"]}
            :rom {:main-opts ["-m" "esprit.make-rom"]}
+           :bootstrap {:main-opts ["-m" "esprit.flash"
+                                   "--bootstrap"]}
+           :erase {:main-opts ["-m" "esprit.flash"
+                               "--erase"]}
+           :flash {:main-opts ["-m" "esprit.flash"
+                               "-f" "out/main.bin"]}
            :repl {:main-opts ["-m" "cljs.main"
                               "-re" "esprit"
-                              "-ro" "@repl-opts.edn"
                               "-r"]}}}

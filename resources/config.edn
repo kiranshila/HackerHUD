@@ -1,0 +1,2 @@
+{:board-file "hackerhud-board.edn"
+ :endpoint-address "192.168.4.38"}

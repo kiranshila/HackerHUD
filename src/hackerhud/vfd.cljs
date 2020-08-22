@@ -1,12 +1,16 @@
 (ns hackerhud.vfd
-  (:require [hackerhud.utils :as utils]))
+  (:require [hackerhud.utils :as utils]
+            [esprit.board :as board]))
 
-; Which serial obj we will use for VFD communication
-(def serial js/Serial2)
-(def tx-pin js/D4)
+(def serial (if-let [s (::serial board/items)]
+              s
+              (println "NOTE: hackerhud.vfd/serial not setup in boards.edn")))
 
 (def commands {:init #js[0x1B 0x40]
                :clear 0x0C
+               :overwrite-mode #js[0x1B 0x11]
+               :vertical-scroll-mode #js[0x1B 0x12]
+               :horizontal-scroll-mode #js[0x1B 0x13]
                :move #js[0x1B 0x6C]
                :brightness #js[0x1B 0x2A]
                :cursor-down 0x0A
@@ -32,7 +36,6 @@
   ([s x y] (set-cursor x y) (display s)))
 
 (defn setup []
-  (utils/serial-setup serial 9600 :tx tx-pin :rx js/D15)
   (command :init)
   (command :clear)
   (display "Hello from CLJS!" 2 0))

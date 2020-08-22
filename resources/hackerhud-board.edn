@@ -1,0 +1,8 @@
+{:hackerhud.vfd/serial
+ {:type :serial
+  :tx "D33"
+  :rx "D4"
+  :baud 9600}
+ :hackerhud.utils/light-sensor
+ {:type :analog
+  :pin "D36"}}

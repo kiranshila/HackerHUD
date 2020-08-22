@@ -2,35 +2,28 @@
 # HackerHUD
 #
 # @file
-# @version 0.1
-
 CLOJURE=clj
-PORT=/dev/ttyUSB0
-ESP=esptool.py
 OUT=out/main.bin
-ESPFLAGS=--port $(PORT) --baud 2000000
 
-.PHONY: clean default erase bootloader
+.PHONY: clean default erase bootstrap
 
-default: out/main.bin
+default: $(OUT)
 
-out/main.js: src/hackerhud/core.cljs resources/build-opts.edn deps.edn
+out/main.js: $(shell find src -type f) $(shell find resources -type f)
 	$(CLOJURE) -A:build
 
-out/main.bin: out/main.js
+$(OUT): out/main.js
 	$(CLOJURE) -A:rom
 
-flash: out/main.bin
-	$(ESP) $(ESPFLAGS) write_flash 0x320000 $(OUT)
+flash: $(OUT)
+	$(CLOJURE) -A:flash
 
 clean:
 	-rm -r .cpcache/
 	-rm -r out
 
 erase:
-	$(ESP) $(ESPFLAGS) erase_flash
+	$(CLOJURE) -A:erase
 
-bootloader:
-	$(ESP) $(ESPFLAGS) write_flash 0x1000 bootloader.bin 0x8000 partitions_espruino.bin 0x10000 espruino_esp32.bin
-
-# end
+bootstrap:
+	$(CLOJURE) -A:bootstrap
