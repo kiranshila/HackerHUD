@@ -110,7 +110,8 @@
 
 (defn update-weather [resp]
   (when resp
-    (let [current (.-current resp)
+    (let [resp (.-state resp)
+          current (.-current resp)
          weather (get (.-weather current) 0)
          feels-like (.-feels_like current)
          uvi (.-uvi current)
@@ -123,7 +124,8 @@
 
 (defn update-aqi [resp]
   (when resp
-    (let [data (.-data resp)
+    (let [resp (.-state resp)
+          data (.-data resp)
           aqi (.-aqi data)]
       (swap! current-weather merge {:aqi (aq-index aqi)}))))
 

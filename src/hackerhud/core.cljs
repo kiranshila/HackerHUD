@@ -78,8 +78,12 @@
     (.. (weather/get-new-weather)
         (then weather/get-new-aqi))))
 
+;; Set the update fn to trigger on alerts
+(reset! alerts/update-page-cb update-page)
+
+;; Startup the timers
 (set-interval update-brightness 1000)
-(set-interval update-page 25000)
+(set-interval update-page 20000)
 (set-interval update-apis 60000)
 
 (defn on-connect [_]

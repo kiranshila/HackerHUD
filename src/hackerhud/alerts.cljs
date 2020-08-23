@@ -8,6 +8,8 @@
 (def alert-port 6969)
 (def alerts (atom []))
 
+(def update-page-cb (atom nil))
+
 (def right-chevron (char 0xAF))
 (def left-chevron (char 0xAE))
 
@@ -16,7 +18,9 @@
 (defn print-edn-alert [s]
   (try
     (let [alert (:alert (read-string s))]
-      (swap! alerts conj alert))
+      (swap! alerts conj alert)
+      (when @update-page-cb
+        (@update-page-cb)))
     (catch :default ex
       (.log js/console "Could not parse EDN"))))
 

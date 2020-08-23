@@ -46,14 +46,14 @@
   (.getDate (js/Date.)))
 
 (defn update-time [resp]
-  (when resp
-    (let [unixtime (.-unixtime resp)
-          offset (-> (.-utc_offset resp)
-                     (str/split #":")
-                     first
-                     int)]
-      (.setTimeZone js/E offset)
-      (js/setTime unixtime))))
+  (let [resp (.-state resp)
+        unixtime (.-unixtime resp)
+        offset (-> (.-utc_offset resp)
+                   (str/split #":")
+                   first
+                   int)]
+    (.setTimeZone js/E offset)
+    (js/setTime unixtime)))
 
 (defn get-new-time
   "Perform a GET to a clock api to update system time"
